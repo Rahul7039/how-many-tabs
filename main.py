@@ -33,11 +33,15 @@ def validate(count: str) -> str:
     return count
 
 
-def main() -> None:
-    count = validate(TAB_COUNT)
-    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
-    with open(OUTPUT_PATH, "w", encoding="utf-8", newline="") as f:
+def write_count(path: str, count: str) -> None:
+    """Write the count with no trailing newline, so the file is digits only."""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8", newline="") as f:
         f.write(count)
+
+
+def main() -> None:
+    write_count(OUTPUT_PATH, validate(TAB_COUNT))
 
 
 if __name__ == "__main__":
